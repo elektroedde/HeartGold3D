@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var temp = false
     var body: some View {
-        VStack {
-            MetalView()
-        }
-        .padding()
+//        ZStack {
+//            if !temp {
+//                MetalView()
+//            }
+//            
+//            Spacer()
+//            HStack {
+//                Toggle("Test", isOn: $temp)
+//                Toggle("Test", isOn: $temp)
+//                Toggle("Test", isOn: $temp)
+//                Toggle("Test", isOn: $temp)
+//            }
+//            
+//        }
+        MetalView()
+        
     }
 }
 

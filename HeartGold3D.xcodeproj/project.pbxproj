@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52720EA32BB7284500014FC6 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA22BB7284500014FC6 /* MathLibrary.swift */; };
+		52720EA52BB72E3700014FC6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA42BB72E3700014FC6 /* Model.swift */; };
+		52720EA72BB72F4300014FC6 /* Rendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA62BB72F4300014FC6 /* Rendering.swift */; };
+		52720EA92BB72FB200014FC6 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA82BB72FB200014FC6 /* VertexDescriptor.swift */; };
+		52720EAC2BB7454000014FC6 /* typhlosion.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 52720EAB2BB7454000014FC6 /* typhlosion.usdz */; };
+		52720EAE2BB748CC00014FC6 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EAD2BB748CC00014FC6 /* Transform.swift */; };
 		5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA712BB6E76D007D3BE0 /* MetalView.swift */; };
 		5280FA742BB6E841007D3BE0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA732BB6E841007D3BE0 /* Renderer.swift */; };
 		5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA752BB6EB41007D3BE0 /* Vertex.metal */; };
@@ -19,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52720EA22BB7284500014FC6 /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		52720EA42BB72E3700014FC6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		52720EA62BB72F4300014FC6 /* Rendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendering.swift; sourceTree = "<group>"; };
+		52720EA82BB72FB200014FC6 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
+		52720EAA2BB7425E00014FC6 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		52720EAB2BB7454000014FC6 /* typhlosion.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = typhlosion.usdz; sourceTree = "<group>"; };
+		52720EAD2BB748CC00014FC6 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		5280FA712BB6E76D007D3BE0 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
 		5280FA732BB6E841007D3BE0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		5280FA752BB6EB41007D3BE0 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
@@ -62,6 +75,9 @@
 		52EFE76A2BB616E900051099 /* HeartGold3D */ = {
 			isa = PBXGroup;
 			children = (
+				52720EA82BB72FB200014FC6 /* VertexDescriptor.swift */,
+				52720EA62BB72F4300014FC6 /* Rendering.swift */,
+				52720EA42BB72E3700014FC6 /* Model.swift */,
 				52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */,
 				52EFE77A2BB61EE200051099 /* Game */,
 				52EFE7802BB61F1E00051099 /* Models */,
@@ -73,6 +89,7 @@
 				52EFE76F2BB616EC00051099 /* Assets.xcassets */,
 				52EFE7712BB616EC00051099 /* HeartGold3D.entitlements */,
 				52EFE7722BB616EC00051099 /* Preview Content */,
+				52720EAD2BB748CC00014FC6 /* Transform.swift */,
 			);
 			path = HeartGold3D;
 			sourceTree = "<group>";
@@ -96,6 +113,7 @@
 		52EFE77B2BB61EE900051099 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				52720EAA2BB7425E00014FC6 /* Common.h */,
 				5280FA752BB6EB41007D3BE0 /* Vertex.metal */,
 				5280FA772BB6EB4A007D3BE0 /* Fragment.metal */,
 			);
@@ -128,6 +146,7 @@
 		52EFE77F2BB61F1700051099 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52720EA22BB7284500014FC6 /* MathLibrary.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -135,6 +154,7 @@
 		52EFE7802BB61F1E00051099 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				52720EAB2BB7454000014FC6 /* typhlosion.usdz */,
 				5280FA792BB6F7DB007D3BE0 /* train.usdz */,
 			);
 			path = Models;
@@ -198,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52720EAC2BB7454000014FC6 /* typhlosion.usdz in Resources */,
 				52EFE7742BB616EC00051099 /* Preview Assets.xcassets in Resources */,
 				52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */,
 				5280FA7A2BB6F7DB007D3BE0 /* train.usdz in Resources */,
@@ -211,12 +232,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52720EAE2BB748CC00014FC6 /* Transform.swift in Sources */,
+				52720EA92BB72FB200014FC6 /* VertexDescriptor.swift in Sources */,
 				5280FA742BB6E841007D3BE0 /* Renderer.swift in Sources */,
+				52720EA32BB7284500014FC6 /* MathLibrary.swift in Sources */,
 				5280FA782BB6EB4A007D3BE0 /* Fragment.metal in Sources */,
 				5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */,
 				5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */,
 				52EFE76E2BB616E900051099 /* ContentView.swift in Sources */,
 				52EFE76C2BB616E900051099 /* HeartGold3DApp.swift in Sources */,
+				52720EA52BB72E3700014FC6 /* Model.swift in Sources */,
+				52720EA72BB72F4300014FC6 /* Rendering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +396,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = HeartGold3D/Shaders/Common.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -408,6 +435,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = HeartGold3D/Shaders/Common.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

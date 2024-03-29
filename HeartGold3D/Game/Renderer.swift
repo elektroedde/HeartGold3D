@@ -7,8 +7,12 @@ class Renderer: NSObject {
     var mesh: MTKMesh!
     var vertexBuffer: MTLBuffer!
     var pipelineState: MTLRenderPipelineState!
-    
     var time: Float = 0
+    var uniforms = Uniforms()
+    
+    lazy var model: Model = {
+        Model(device: Renderer.device, name: "typhlosion")
+    }()
 
     init(metalView: MTKView) {
         guard
@@ -19,66 +23,46 @@ class Renderer: NSObject {
         Self.device = device
         Self.commandQueue = commandQueue
         metalView.device = device
-
-        // Create the mesh
-        let allocator = MTKMeshBufferAllocator(device: device)
-        guard let assetURL = Bundle.main.url(forResource: "train", withExtension: "usdz")
-        else{ fatalError() }
         
-        let vertexDescriptor = MTLVertexDescriptor()
-        vertexDescriptor.attributes[0].format = .float3
-        vertexDescriptor.attributes[0].offset = 0
-        vertexDescriptor.attributes[0].bufferIndex = 0
-        vertexDescriptor.layouts[0].stride = MemoryLayout<SIMD3<Float>>.stride
-        
-        let meshDescriptor = MTKModelIOVertexDescriptorFromMetal(vertexDescriptor)
-        (meshDescriptor.attributes[0] as! MDLVertexAttribute).name = MDLVertexAttributePosition
-        
-        let asset = MDLAsset(url: assetURL, vertexDescriptor: meshDescriptor, bufferAllocator: allocator)
-        let mdlMesh = asset.childObjects(of: MDLMesh.self).first as! MDLMesh
-        
-        
-        
-        //For primitives
-//        let size: Float = 0.8
-//        let mdlMesh = MDLMesh(boxWithExtent: SIMD3<Float>(repeating: size), segments: [1, 1, 1], inwardNormals: false, geometryType: .triangles, allocator: allocator)
-
-        do {
-            mesh = try MTKMesh(mesh: mdlMesh, device: device)
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        vertexBuffer = mesh.vertexBuffers[0].buffer
-
         // Create the library
         let library = device.makeDefaultLibrary()
         Self.library = library
         let vertexFunction = library?.makeFunction(name: "vertex_main")
         let fragmentFunction = library?.makeFunction(name: "fragment_main")
 
+
         // Create the pipeline state
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
-        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
+        pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
 
         do {
             pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError(error.localizedDescription)
         }
-
+        
         super.init()
 
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.3, blue: 1.0, alpha: 1.0)
         metalView.delegate = self
+        
+
+        
+        mtkView(metalView, drawableSizeWillChange: metalView.drawableSize)
     }
 }
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        let aspect = Float(view.bounds.width) / Float(view.bounds.height)
+        let projectionMatrix = float4x4(projectionFov: Float(70).degreesToRadians,
+                                        near: 0.1,
+                                        far: 100,
+                                        aspect: aspect)
+        uniforms.projectionMatrix = projectionMatrix
     }
 
     func draw(in view: MTKView) {
@@ -89,20 +73,20 @@ extension Renderer: MTKViewDelegate {
         else { return }
         
         time += 0.05
-        var test = sin(time)
+//        var test = sin(time)
         
-        renderEncoder.setVertexBytes(&test, length: MemoryLayout<Float>.stride, index: 1)
-
+        uniforms.viewMatrix = float4x4(translation: [0, 0, -4]).inverse
+        
+        
+        model.position.y = -0.6
+        model.rotation.y = sin(time)
+        model.scale = 0.01
+        
+        uniforms.modelMatrix = model.transform.modelMatrix
         renderEncoder.setRenderPipelineState(pipelineState)
-        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        for submesh in mesh.submeshes {
-            renderEncoder.drawIndexedPrimitives(type: .triangle,
-                                                indexCount: submesh.indexCount,
-                                                indexType: submesh.indexType,
-                                                indexBuffer: submesh.indexBuffer.buffer,
-                                                indexBufferOffset: submesh.indexBuffer.offset)
-        }
-        
+        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 11)
+
+        model.render(encoder: renderEncoder)
         
         
         renderEncoder.endEncoding()
@@ -114,3 +98,20 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
 }
+
+
+//For primitives
+//        let size: Float = 0.8
+//        let mdlMesh = MDLMesh(boxWithExtent: SIMD3<Float>(repeating: size), segments: [1, 1, 1], inwardNormals: false, geometryType: .triangles, allocator: allocator)
+
+//renderEncoder.setVertexBytes(&test, length: MemoryLayout<Float>.stride, index: 1)
+//
+//        renderEncoder.setRenderPipelineState(pipelineState)
+//        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+//        for submesh in mesh.submeshes {
+//            renderEncoder.drawIndexedPrimitives(type: .triangle,
+//                                                indexCount: submesh.indexCount,
+//                                                indexType: submesh.indexType,
+//                                                indexBuffer: submesh.indexBuffer.buffer,
+//                                                indexBufferOffset: submesh.indexBuffer.offset)
+//        }
