@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA712BB6E76D007D3BE0 /* MetalView.swift */; };
+		5280FA742BB6E841007D3BE0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA732BB6E841007D3BE0 /* Renderer.swift */; };
+		5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA752BB6EB41007D3BE0 /* Vertex.metal */; };
+		5280FA782BB6EB4A007D3BE0 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA772BB6EB4A007D3BE0 /* Fragment.metal */; };
+		5280FA7A2BB6F7DB007D3BE0 /* train.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 5280FA792BB6F7DB007D3BE0 /* train.usdz */; };
 		52EFE76C2BB616E900051099 /* HeartGold3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */; };
 		52EFE76E2BB616E900051099 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EFE76D2BB616E900051099 /* ContentView.swift */; };
 		52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52EFE76F2BB616EC00051099 /* Assets.xcassets */; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5280FA712BB6E76D007D3BE0 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		5280FA732BB6E841007D3BE0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		5280FA752BB6EB41007D3BE0 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
+		5280FA772BB6EB4A007D3BE0 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
+		5280FA792BB6F7DB007D3BE0 /* train.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = train.usdz; sourceTree = "<group>"; };
 		52EFE7682BB616E900051099 /* HeartGold3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartGold3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartGold3DApp.swift; sourceTree = "<group>"; };
 		52EFE76D2BB616E900051099 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,7 +63,13 @@
 			isa = PBXGroup;
 			children = (
 				52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */,
-				52EFE76D2BB616E900051099 /* ContentView.swift */,
+				52EFE77A2BB61EE200051099 /* Game */,
+				52EFE7802BB61F1E00051099 /* Models */,
+				52EFE77F2BB61F1700051099 /* Utility */,
+				52EFE77E2BB61F0A00051099 /* Input */,
+				52EFE77D2BB61F0000051099 /* SwiftUI Views */,
+				52EFE77C2BB61EEF00051099 /* Textures */,
+				52EFE77B2BB61EE900051099 /* Shaders */,
 				52EFE76F2BB616EC00051099 /* Assets.xcassets */,
 				52EFE7712BB616EC00051099 /* HeartGold3D.entitlements */,
 				52EFE7722BB616EC00051099 /* Preview Content */,
@@ -67,6 +83,61 @@
 				52EFE7732BB616EC00051099 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		52EFE77A2BB61EE200051099 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				5280FA732BB6E841007D3BE0 /* Renderer.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		52EFE77B2BB61EE900051099 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				5280FA752BB6EB41007D3BE0 /* Vertex.metal */,
+				5280FA772BB6EB4A007D3BE0 /* Fragment.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		52EFE77C2BB61EEF00051099 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Textures;
+			sourceTree = "<group>";
+		};
+		52EFE77D2BB61F0000051099 /* SwiftUI Views */ = {
+			isa = PBXGroup;
+			children = (
+				5280FA712BB6E76D007D3BE0 /* MetalView.swift */,
+				52EFE76D2BB616E900051099 /* ContentView.swift */,
+			);
+			path = "SwiftUI Views";
+			sourceTree = "<group>";
+		};
+		52EFE77E2BB61F0A00051099 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		52EFE77F2BB61F1700051099 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		52EFE7802BB61F1E00051099 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5280FA792BB6F7DB007D3BE0 /* train.usdz */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +200,7 @@
 			files = (
 				52EFE7742BB616EC00051099 /* Preview Assets.xcassets in Resources */,
 				52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */,
+				5280FA7A2BB6F7DB007D3BE0 /* train.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5280FA742BB6E841007D3BE0 /* Renderer.swift in Sources */,
+				5280FA782BB6EB4A007D3BE0 /* Fragment.metal in Sources */,
+				5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */,
+				5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */,
 				52EFE76E2BB616E900051099 /* ContentView.swift in Sources */,
 				52EFE76C2BB616E900051099 /* HeartGold3DApp.swift in Sources */,
 			);
