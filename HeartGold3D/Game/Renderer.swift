@@ -4,15 +4,14 @@ class Renderer: NSObject {
     static var device: MTLDevice!
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
-    var mesh: MTKMesh!
-    var vertexBuffer: MTLBuffer!
-    var pipelineState: MTLRenderPipelineState!
-    var time: Float = 0
-    var uniforms = Uniforms()
     
-    lazy var model: Model = {
-        Model(device: Renderer.device, name: "typhlosion")
-    }()
+    
+    var pipelineState: MTLRenderPipelineState!
+    let depthStencilState: MTLDepthStencilState?
+    
+    var uniforms = Uniforms()
+    var params = Params()
+    
 
     init(metalView: MTKView) {
         guard
@@ -36,6 +35,7 @@ class Renderer: NSObject {
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
 
         do {
@@ -44,50 +44,66 @@ class Renderer: NSObject {
             fatalError(error.localizedDescription)
         }
         
+        depthStencilState = Renderer.buildDepthStencilState()
+        
         super.init()
 
-        metalView.clearColor = MTLClearColor(red: 1.0, green: 0.3, blue: 1.0, alpha: 1.0)
-        metalView.delegate = self
+        metalView.clearColor = MTLClearColor(red: 0.65, green: 0.8, blue: 1.0, alpha: 1.0)
+        metalView.depthStencilPixelFormat = .depth32Float
         
 
-        
         mtkView(metalView, drawableSizeWillChange: metalView.drawableSize)
+    }
+    
+    static func buildDepthStencilState() -> MTLDepthStencilState? {
+        let descriptor = MTLDepthStencilDescriptor()
+        
+        descriptor.depthCompareFunction = .less
+        descriptor.isDepthWriteEnabled = true
+        
+        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
     }
 }
 
-extension Renderer: MTKViewDelegate {
+extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        let aspect = Float(view.bounds.width) / Float(view.bounds.height)
-        let projectionMatrix = float4x4(projectionFov: Float(70).degreesToRadians,
-                                        near: 0.1,
-                                        far: 100,
-                                        aspect: aspect)
-        uniforms.projectionMatrix = projectionMatrix
+    }
+    
+    func updateUniforms(scene: GameScene) {
+        uniforms.viewMatrix = scene.camera.viewMatrix
+        uniforms.projectionMatrix = scene.camera.projectionMatrix
+        params.lightCount = UInt32(scene.lighting.lights.count)
+    
     }
 
-    func draw(in view: MTKView) {
+    func draw(scene: GameScene, in view: MTKView) {
         guard
             let commandBuffer = Self.commandQueue.makeCommandBuffer(),
             let descriptor = view.currentRenderPassDescriptor,
             let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
         else { return }
         
-        time += 0.05
-//        var test = sin(time)
+        updateUniforms(scene: scene)
         
-        uniforms.viewMatrix = float4x4(translation: [0, 0, -4]).inverse
-        
-        
-        model.position.y = -0.6
-        model.rotation.y = sin(time)
-        model.scale = 0.01
-        
-        uniforms.modelMatrix = model.transform.modelMatrix
+        renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
-        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 11)
-
-        model.render(encoder: renderEncoder)
         
+        //Here we should set lighting.lights
+        var lights = scene.lighting.lights
+//        print(scene.lighting.sunlight.position)
+        //and here stride * count
+        renderEncoder.setFragmentBytes(&lights, length: MemoryLayout<Light>.stride * lights.count, index: LightBuffer.index)
+
+        for model in scene.models {
+          model.render(
+            encoder: renderEncoder,
+            uniforms: uniforms,
+            params: params)
+        }
+//        DebugLights.draw(
+//          lights: scene.lighting.sunlight,
+//          encoder: renderEncoder,
+//          uniforms: uniforms)
         
         renderEncoder.endEncoding()
         
@@ -98,20 +114,3 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
 }
-
-
-//For primitives
-//        let size: Float = 0.8
-//        let mdlMesh = MDLMesh(boxWithExtent: SIMD3<Float>(repeating: size), segments: [1, 1, 1], inwardNormals: false, geometryType: .triangles, allocator: allocator)
-
-//renderEncoder.setVertexBytes(&test, length: MemoryLayout<Float>.stride, index: 1)
-//
-//        renderEncoder.setRenderPipelineState(pipelineState)
-//        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-//        for submesh in mesh.submeshes {
-//            renderEncoder.drawIndexedPrimitives(type: .triangle,
-//                                                indexCount: submesh.indexCount,
-//                                                indexType: submesh.indexType,
-//                                                indexBuffer: submesh.indexBuffer.buffer,
-//                                                indexBufferOffset: submesh.indexBuffer.offset)
-//        }

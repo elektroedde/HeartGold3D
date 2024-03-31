@@ -15,14 +15,12 @@ struct ContentView: View {
 //                MetalView()
 //            }
 //            
-//            Spacer()
-//            HStack {
+////            Spacer()
+//            VStack() {
 //                Toggle("Test", isOn: $temp)
-//                Toggle("Test", isOn: $temp)
-//                Toggle("Test", isOn: $temp)
-//                Toggle("Test", isOn: $temp)
-//            }
-//            
+//            }.position(x: 50, y: 50)
+//
+            
 //        }
         MetalView()
         

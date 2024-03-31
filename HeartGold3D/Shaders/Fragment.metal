@@ -1,14 +1,40 @@
-//
-//  Fragment.metal
-//  HeartGold3D
-//
-//  Created by Edvin Berling on 2024-03-29.
-//
+#include <metal_stdlib>
+using namespace metal;
+#import "Lighting.h"
+#import "ShaderDefs.h"
 
-//#include <metal_stdlib>
-//using namespace metal;
-//
-//
-//fragment float4 fragment_main() {
-//    return float4(0.3, 0, 0.3, 1);
-//}
+fragment float4 fragment_main(constant Params &   params [[buffer(ParamsBuffer)]],
+                              VertexOut           in [[stage_in]],
+                              texture2d < float > baseColorTexture [[texture(BaseColor)]],
+                              constant Light      *lights [[buffer(LightBuffer)]]) {
+//    constexpr sampler textureSampler(
+//        filter::linear,
+//        mip_filter::linear,
+//        max_anisotropy(8),
+//        address::repeat);
+//    float3 baseColor = baseColorTexture.sample(
+//        textureSampler,
+//        in.uv * params.tiling).rgb;
+
+//        return float4(in.normal ,1);
+
+    constexpr sampler textureSampler(
+        filter::linear,
+        mip_filter::linear,
+        max_anisotropy(8),
+        address::repeat);
+    
+    float3 baseColor = baseColorTexture.sample(
+        textureSampler,
+        in.uv * params.tiling).rgb;
+    
+    float3 normalDirection = normalize(in.worldNormal);
+    float3 color = phongLighting(
+        normalDirection,
+        in.worldPosition,
+        params,
+        lights,
+        baseColor);
+
+    return float4(color, 1);
+}

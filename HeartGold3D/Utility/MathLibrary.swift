@@ -1,3 +1,4 @@
+import CoreGraphics
 import simd
 
 extension float4x4 {
@@ -5,7 +6,7 @@ extension float4x4 {
         matrix_identity_float4x4
     }
 
-    //Translation
+    // Translation
     init(translation: SIMD3<Float>) {
         let x = translation.x, y = translation.y, z = translation.z
         let matrix = float4x4(
@@ -16,7 +17,7 @@ extension float4x4 {
         self = matrix
     }
 
-    //Scaling
+    // Scaling
     init(scaling: SIMD3<Float>) {
         let x = scaling.x, y = scaling.y, z = scaling.z
         let matrix = float4x4(
@@ -26,13 +27,13 @@ extension float4x4 {
             [0, 0, 0, 1])
         self = matrix
     }
-    
+
     init(scaling: Float) {
         self = matrix_identity_float4x4
         columns.3.w = 1 / scaling
     }
 
-    //Rotation
+    // Rotation
     init(rotation angle: SIMD3<Float>) {
         let rotationX = float4x4(rotationX: angle.x)
         let rotationY = float4x4(rotationY: angle.y)
@@ -40,17 +41,24 @@ extension float4x4 {
         self = rotationX * rotationY * rotationZ
     }
 
-    //Projection
+    init(rotationYXZ angle: SIMD3<Float>) {
+        let rotationX = float4x4(rotationX: angle.x)
+        let rotationY = float4x4(rotationY: angle.y)
+        let rotationZ = float4x4(rotationZ: angle.z)
+        self = rotationY * rotationX * rotationZ
+    }
+
+    // Projection
     init(projectionFov fov: Float, near: Float, far: Float, aspect: Float) {
         let y = 1 / tan(fov / 2)
         let x = y / aspect
         let z = far / (far - near)
-        
+
         let X = SIMD4<Float>(x, 0, 0, 0)
         let Y = SIMD4<Float>(0, y, 0, 0)
         let Z = SIMD4<Float>(0, 0, z, 1)
         let W = SIMD4<Float>(0, 0, z * -near, 0)
-        
+
         self.init()
         columns = (X, Y, Z, W)
     }
@@ -103,18 +111,32 @@ extension float4x4 {
         self = matrix
     }
 
+    var upperLeft: float3x3 {
+        let x: SIMD3<Float> = [columns.0.x, columns.0.y, columns.0.z]
+        let y: SIMD3<Float> = [columns.1.x, columns.1.y, columns.1.z]
+        let z: SIMD3<Float> = [columns.2.x, columns.2.y, columns.2.z]
+        return float3x3(columns: (x, y, z))
+    }
+
 //    init(scaling: Float) {
 //      self = matrix_identity_float4x4
 //      columns.3.w = 1 / scaling
 //    }
 }
 
+extension float3x3 {
+    init(normalFrom4x4 matrix: float4x4) {
+        self.init()
+        columns = matrix.upperLeft.inverse.transpose.columns
+    }
+}
+
 extension Float {
     var radiansToDegrees: Float {
-      (self / .pi) * 180
+        (self / .pi) * 180
     }
-    
+
     var degreesToRadians: Float {
-      (self / 180) * .pi
+        (self / 180) * .pi
     }
 }
