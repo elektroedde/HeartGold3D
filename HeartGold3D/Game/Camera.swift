@@ -8,6 +8,8 @@ protocol Camera: Transformable {
 }
 
 struct PlayerCamera: Camera {
+//    var gameController: InputController
+    var gameController = InputController()
     var transform = Transform()
     var aspect: Float = 1.0
     var fov = Float(70).degreesToRadians
@@ -25,14 +27,35 @@ struct PlayerCamera: Camera {
             rotateMatrix).inverse
     }
     
+    init() {
+        position = [0, 1.5, -4]
+    }
+
+    
     mutating func update(size: CGSize) {
         aspect = Float(size.width / size.height)
     }
     
     mutating func update(deltaTime: Float) {
-        let transform = updateInput(deltaTime: deltaTime)
-        rotation += transform.rotation
-        position += transform.position
+        
+        //WASD
+//        let transform = updateInput(deltaTime: deltaTime)
+//        rotation += transform.rotation
+//        position += transform.position
+        
+        //DUALSENSE
+        rotation.x += gameController.cameraX/25
+        rotation.y += gameController.cameraY/25
+        
+        position.z += gameController.positionY/20 * cos(rotation.y) + gameController.positionX/20 * -sin(rotation.y)
+        position.x += gameController.positionY/20 * sin(rotation.y) + gameController.positionX/20 * cos(rotation.y)
+        
+        if gameController.flyUp {
+            position.y += 0.1
+        }
+        if gameController.flyDown {
+            position.y -= 0.1
+        }
     }
 }
 

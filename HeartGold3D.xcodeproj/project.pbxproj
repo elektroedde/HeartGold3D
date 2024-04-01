@@ -23,6 +23,11 @@
 		5280FA742BB6E841007D3BE0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA732BB6E841007D3BE0 /* Renderer.swift */; };
 		5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA752BB6EB41007D3BE0 /* Vertex.metal */; };
 		5280FA782BB6EB4A007D3BE0 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5280FA772BB6EB4A007D3BE0 /* Fragment.metal */; };
+		52C25CE52BBB0F630094BD8B /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C25CE42BBB0F630094BD8B /* Options.swift */; };
+		52C25CE82BBB2D7C0094BD8B /* Typhlosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C25CE72BBB2D7C0094BD8B /* Typhlosion.swift */; };
+		52C25CF12BBB2F1A0094BD8B /* PokeCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C25CF02BBB2F1A0094BD8B /* PokeCenter.swift */; };
+		52C25CF52BBB2FAD0094BD8B /* TempGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C25CF42BBB2FAD0094BD8B /* TempGround.swift */; };
+		52C25CF92BBB34F00094BD8B /* ground2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 52C25CF82BBB34F00094BD8B /* ground2.usdz */; };
 		52EFE76C2BB616E900051099 /* HeartGold3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */; };
 		52EFE76E2BB616E900051099 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EFE76D2BB616E900051099 /* ContentView.swift */; };
 		52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52EFE76F2BB616EC00051099 /* Assets.xcassets */; };
@@ -61,6 +66,11 @@
 		5280FA732BB6E841007D3BE0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		5280FA752BB6EB41007D3BE0 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
 		5280FA772BB6EB4A007D3BE0 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
+		52C25CE42BBB0F630094BD8B /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		52C25CE72BBB2D7C0094BD8B /* Typhlosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typhlosion.swift; sourceTree = "<group>"; };
+		52C25CF02BBB2F1A0094BD8B /* PokeCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCenter.swift; sourceTree = "<group>"; };
+		52C25CF42BBB2FAD0094BD8B /* TempGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGround.swift; sourceTree = "<group>"; };
+		52C25CF82BBB34F00094BD8B /* ground2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = ground2.usdz; sourceTree = "<group>"; };
 		52EFE7682BB616E900051099 /* HeartGold3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartGold3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartGold3DApp.swift; sourceTree = "<group>"; };
 		52EFE76D2BB616E900051099 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +103,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52C25CE62BBB2D720094BD8B /* Pokemon */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CE72BBB2D7C0094BD8B /* Typhlosion.swift */,
+			);
+			path = Pokemon;
+			sourceTree = "<group>";
+		};
+		52C25CE92BBB2E480094BD8B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CEE2BBB2E870094BD8B /* Sounds */,
+				52C25CEA2BBB2E4F0094BD8B /* Models */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		52C25CEA2BBB2E4F0094BD8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CED2BBB2E6B0094BD8B /* Environment */,
+				52C25CEC2BBB2E590094BD8B /* Buildings */,
+				52C25CEB2BBB2E550094BD8B /* Pokemon */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		52C25CEB2BBB2E550094BD8B /* Pokemon */ = {
+			isa = PBXGroup;
+			children = (
+				52720EAB2BB7454000014FC6 /* typhlosion.usdz */,
+			);
+			path = Pokemon;
+			sourceTree = "<group>";
+		};
+		52C25CEC2BBB2E590094BD8B /* Buildings */ = {
+			isa = PBXGroup;
+			children = (
+				52F95D182BB9D88E009395BB /* pokecenter.usdz */,
+			);
+			path = Buildings;
+			sourceTree = "<group>";
+		};
+		52C25CED2BBB2E6B0094BD8B /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CF82BBB34F00094BD8B /* ground2.usdz */,
+				52F95D382BBA1239009395BB /* ground.usdz */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		52C25CEE2BBB2E870094BD8B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				52F95D302BBA0AAF009395BB /* NBT.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		52C25CEF2BBB2F0B0094BD8B /* Buildings */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CF02BBB2F1A0094BD8B /* PokeCenter.swift */,
+			);
+			path = Buildings;
+			sourceTree = "<group>";
+		};
+		52C25CF22BBB2F840094BD8B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CF32BBB2F980094BD8B /* Environment */,
+				52C25CEF2BBB2F0B0094BD8B /* Buildings */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		52C25CF32BBB2F980094BD8B /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				52C25CF42BBB2FAD0094BD8B /* TempGround.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
 		52EFE75F2BB616E900051099 = {
 			isa = PBXGroup;
 			children = (
@@ -113,15 +208,17 @@
 			isa = PBXGroup;
 			children = (
 				52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */,
-				52F95D2F2BBA0AA1009395BB /* Sounds */,
-				52F95D222BB9F1DD009395BB /* Geometry */,
 				52EFE77A2BB61EE200051099 /* Game */,
-				52EFE7802BB61F1E00051099 /* Models */,
+				52C25CE62BBB2D720094BD8B /* Pokemon */,
 				52EFE77F2BB61F1700051099 /* Utility */,
 				52EFE77E2BB61F0A00051099 /* Input */,
-				52EFE77D2BB61F0000051099 /* SwiftUI Views */,
-				52EFE77C2BB61EEF00051099 /* Textures */,
 				52EFE77B2BB61EE900051099 /* Shaders */,
+				52EFE77C2BB61EEF00051099 /* Textures */,
+				52C25CF22BBB2F840094BD8B /* Objects */,
+				52F95D222BB9F1DD009395BB /* Geometry */,
+				52C25CE92BBB2E480094BD8B /* Resources */,
+				52F95D2F2BBA0AA1009395BB /* Sounds */,
+				52EFE77D2BB61F0000051099 /* SwiftUI Views */,
 				52EFE76F2BB616EC00051099 /* Assets.xcassets */,
 				52EFE7712BB616EC00051099 /* HeartGold3D.entitlements */,
 				52EFE7722BB616EC00051099 /* Preview Content */,
@@ -178,6 +275,7 @@
 			children = (
 				5280FA712BB6E76D007D3BE0 /* MetalView.swift */,
 				52EFE76D2BB616E900051099 /* ContentView.swift */,
+				52C25CE42BBB0F630094BD8B /* Options.swift */,
 			);
 			path = "SwiftUI Views";
 			sourceTree = "<group>";
@@ -201,16 +299,6 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		52EFE7802BB61F1E00051099 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				52F95D382BBA1239009395BB /* ground.usdz */,
-				52F95D182BB9D88E009395BB /* pokecenter.usdz */,
-				52720EAB2BB7454000014FC6 /* typhlosion.usdz */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		52F95D222BB9F1DD009395BB /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +315,6 @@
 		52F95D2F2BBA0AA1009395BB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				52F95D302BBA0AAF009395BB /* NBT.mp3 */,
 				52F95D3A2BBA15C1009395BB /* Music.swift */,
 			);
 			path = Sounds;
@@ -292,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52720EAC2BB7454000014FC6 /* typhlosion.usdz in Resources */,
+				52C25CF92BBB34F00094BD8B /* ground2.usdz in Resources */,
 				52EFE7742BB616EC00051099 /* Preview Assets.xcassets in Resources */,
 				52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */,
 				52F95D192BB9D88E009395BB /* pokecenter.usdz in Resources */,
@@ -310,6 +398,7 @@
 			files = (
 				52720EAE2BB748CC00014FC6 /* Transform.swift in Sources */,
 				52F95D252BB9F297009395BB /* GameController.swift in Sources */,
+				52C25CE52BBB0F630094BD8B /* Options.swift in Sources */,
 				52720EB22BB74EA000014FC6 /* Mesh.swift in Sources */,
 				52F95D0F2BB9BD8F009395BB /* TextureController.swift in Sources */,
 				52720EA92BB72FB200014FC6 /* VertexDescriptor.swift in Sources */,
@@ -319,12 +408,15 @@
 				5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */,
 				52F95D2E2BB9FFB5009395BB /* Lighting.metal in Sources */,
 				52720EB92BB758A900014FC6 /* InputController.swift in Sources */,
+				52C25CE82BBB2D7C0094BD8B /* Typhlosion.swift in Sources */,
+				52C25CF52BBB2FAD0094BD8B /* TempGround.swift in Sources */,
 				52720EB02BB74CA700014FC6 /* GameScene.swift in Sources */,
 				5280FA762BB6EB41007D3BE0 /* Vertex.metal in Sources */,
 				52EFE76E2BB616E900051099 /* ContentView.swift in Sources */,
 				52EFE76C2BB616E900051099 /* HeartGold3DApp.swift in Sources */,
 				52720EB72BB7568B00014FC6 /* Camera.swift in Sources */,
 				52F95D0B2BB9B802009395BB /* Primitive.swift in Sources */,
+				52C25CF12BBB2F1A0094BD8B /* PokeCenter.swift in Sources */,
 				52F95D3B2BBA15C1009395BB /* Music.swift in Sources */,
 				52720EB42BB74F4000014FC6 /* Submesh.swift in Sources */,
 				52F95D362BBA0F22009395BB /* DebugLights.metal in Sources */,

@@ -1,4 +1,7 @@
+import MetalKit
+
 struct SceneLighting {
+    var options: Options
     var lights: [Light] = []
     var sunlight: Light = {
         var light = Self.buildDefaultLight()
@@ -23,8 +26,21 @@ struct SceneLighting {
         return light
     }
 
-    init() {
+    init(options: Options) {
         lights.append(sunlight)
         lights.append(ambientLight)
+        self.options = options
+    }
+    
+    mutating func update(size: CGSize) {
+        
+    }
+    
+    mutating func update(deltaTime: Float) {
+        
+        //temporary solution to change a lights value
+        lights[0].position = [100*options.angle-50, 10, -20]
+
+
     }
 }

@@ -2,15 +2,20 @@ import MetalKit
 
 class GameController: NSObject {
     var scene: GameScene
+    let music = Music()
     var renderer: Renderer
-    //  var options = Options()
+    var options: Options
+    
     var fps: Double = 0
     var deltaTime: Double = 0
     var lastTime: Double = CFAbsoluteTimeGetCurrent()
 
-    init(metalView: MTKView) {
-        renderer = Renderer(metalView: metalView)
-        scene = GameScene()
+    init(metalView: MTKView, options: Options) {
+        renderer = Renderer(metalView: metalView, options: options)
+        scene = GameScene(options: options)
+        
+        self.options = options
+        
         super.init()
         metalView.delegate = self
         fps = Double(metalView.preferredFramesPerSecond)

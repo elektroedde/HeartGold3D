@@ -2,15 +2,16 @@ import MetalKit
 import SwiftUI
 
 struct MetalView: View {
+    let options: Options
     @State private var metalView = MTKView()
     @State private var gameController: GameController?
     @State private var previousTranslation = CGSize.zero
     @State private var previousScroll: CGFloat = 1
 
     var body: some View {
-        MetalViewRepresentable(gameController: gameController, metalView: $metalView)
+        MetalViewRepresentable(options: options, gameController: gameController, metalView: $metalView)
             .onAppear {
-                gameController = GameController(metalView: metalView)
+                gameController = GameController(metalView: metalView, options: options)
             }
     }
 }
@@ -22,6 +23,7 @@ struct MetalView: View {
 #endif
 
 struct MetalViewRepresentable: ViewRepresentable {
+    let options: Options
     let gameController: GameController?
     @Binding var metalView: MTKView
 
@@ -48,9 +50,9 @@ struct MetalViewRepresentable: ViewRepresentable {
     }
 }
 
-#Preview {
-    VStack {
-        MetalView()
-        Text("Metal View")
-    }
-}
+//#Preview {
+//    VStack {
+//        MetalView()
+//        Text("Metal View")
+//    }
+//}
