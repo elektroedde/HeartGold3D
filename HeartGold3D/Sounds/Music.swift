@@ -14,6 +14,6 @@ struct Music {
             print("Error loading audio file: \(error.localizedDescription)")
         }
         
-//        audioPlayer?.play()
+        audioPlayer?.play()
     }
 }

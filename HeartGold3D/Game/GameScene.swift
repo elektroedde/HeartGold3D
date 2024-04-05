@@ -12,10 +12,17 @@ struct GameScene {
     var pokecenter = PokeCenter()
     var tempground = TempGround()
     
+    lazy var donut: Model = {
+        let donut = Model(name: "groudon")
+        donut.transform.position.z = -15
+        donut.transform.position.y = 2
+        return donut
+    }()
+    
     init(options: Options) {
         self.options = options
         lighting = SceneLighting(options: options)
-        models = [typhlosion.model, pokecenter.model, tempground.model]
+        models = [typhlosion.model, pokecenter.model, tempground.model, donut]
     }
     
     mutating func update(size: CGSize) {

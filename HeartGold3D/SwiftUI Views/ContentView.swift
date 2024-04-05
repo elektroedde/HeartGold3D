@@ -15,7 +15,11 @@ struct ContentView: View {
             MetalView(options: options).ignoresSafeArea()
 
             OptionView(options: $options)
-        }.statusBar(hidden: true)
+        }
+
+        #if os(iOS)
+        .statusBar(hidden: true)
+        #endif
     }
 }
 
@@ -50,7 +54,7 @@ struct OptionView: View {
                                     Toggle("Debug lights", isOn: $options.showDebugLights).padding(.leading, 10)
                                     Spacer()
                                 }
-                                
+
                                 Slider(value: $options.angle)
                             }
                         }

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5204C2D52BC0180400DD5146 /* experiment.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 5204C2D42BC0180400DD5146 /* experiment.usdz */; };
+		5204C2D72BC01BA100DD5146 /* donut.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 5204C2D62BC01BA100DD5146 /* donut.usdz */; };
+		5204C2D92BC01BFB00DD5146 /* groudon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 5204C2D82BC01BFB00DD5146 /* groudon.usdz */; };
+		5204C2DB2BC01CF600DD5146 /* groudon2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 5204C2DA2BC01CF600DD5146 /* groudon2.usdz */; };
+		5204C2DE2BC0210A00DD5146 /* Pipelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204C2DD2BC0210A00DD5146 /* Pipelines.swift */; };
+		5204C2E02BC0211200DD5146 /* RenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204C2DF2BC0211200DD5146 /* RenderPass.swift */; };
+		5204C2E22BC0211D00DD5146 /* ForwardRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204C2E12BC0211D00DD5146 /* ForwardRenderPass.swift */; };
 		52720EA32BB7284500014FC6 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA22BB7284500014FC6 /* MathLibrary.swift */; };
 		52720EA52BB72E3700014FC6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA42BB72E3700014FC6 /* Model.swift */; };
 		52720EA72BB72F4300014FC6 /* Rendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52720EA62BB72F4300014FC6 /* Rendering.swift */; };
@@ -47,6 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5204C2D42BC0180400DD5146 /* experiment.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = experiment.usdz; sourceTree = "<group>"; };
+		5204C2D62BC01BA100DD5146 /* donut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = donut.usdz; sourceTree = "<group>"; };
+		5204C2D82BC01BFB00DD5146 /* groudon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = groudon.usdz; sourceTree = "<group>"; };
+		5204C2DA2BC01CF600DD5146 /* groudon2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = groudon2.usdz; sourceTree = "<group>"; };
+		5204C2DD2BC0210A00DD5146 /* Pipelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipelines.swift; sourceTree = "<group>"; };
+		5204C2DF2BC0211200DD5146 /* RenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPass.swift; sourceTree = "<group>"; };
+		5204C2E12BC0211D00DD5146 /* ForwardRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardRenderPass.swift; sourceTree = "<group>"; };
 		52720EA22BB7284500014FC6 /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		52720EA42BB72E3700014FC6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		52720EA62BB72F4300014FC6 /* Rendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rendering.swift; sourceTree = "<group>"; };
@@ -103,6 +117,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5204C2DC2BC020F800DD5146 /* RenderPasses */ = {
+			isa = PBXGroup;
+			children = (
+				5204C2DD2BC0210A00DD5146 /* Pipelines.swift */,
+				5204C2DF2BC0211200DD5146 /* RenderPass.swift */,
+				5204C2E12BC0211D00DD5146 /* ForwardRenderPass.swift */,
+			);
+			path = RenderPasses;
+			sourceTree = "<group>";
+		};
 		52C25CE62BBB2D720094BD8B /* Pokemon */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +138,10 @@
 		52C25CE92BBB2E480094BD8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5204C2DA2BC01CF600DD5146 /* groudon2.usdz */,
+				5204C2D82BC01BFB00DD5146 /* groudon.usdz */,
+				5204C2D62BC01BA100DD5146 /* donut.usdz */,
+				5204C2D42BC0180400DD5146 /* experiment.usdz */,
 				52C25CEE2BBB2E870094BD8B /* Sounds */,
 				52C25CEA2BBB2E4F0094BD8B /* Models */,
 			);
@@ -208,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				52EFE76B2BB616E900051099 /* HeartGold3DApp.swift */,
+				5204C2DC2BC020F800DD5146 /* RenderPasses */,
 				52EFE77A2BB61EE200051099 /* Game */,
 				52C25CE62BBB2D720094BD8B /* Pokemon */,
 				52EFE77F2BB61F1700051099 /* Utility */,
@@ -379,8 +408,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				52720EAC2BB7454000014FC6 /* typhlosion.usdz in Resources */,
+				5204C2DB2BC01CF600DD5146 /* groudon2.usdz in Resources */,
 				52C25CF92BBB34F00094BD8B /* ground2.usdz in Resources */,
+				5204C2D52BC0180400DD5146 /* experiment.usdz in Resources */,
+				5204C2D92BC01BFB00DD5146 /* groudon.usdz in Resources */,
 				52EFE7742BB616EC00051099 /* Preview Assets.xcassets in Resources */,
+				5204C2D72BC01BA100DD5146 /* donut.usdz in Resources */,
 				52EFE7702BB616EC00051099 /* Assets.xcassets in Resources */,
 				52F95D192BB9D88E009395BB /* pokecenter.usdz in Resources */,
 				52F95D392BBA1239009395BB /* ground.usdz in Resources */,
@@ -398,6 +431,7 @@
 			files = (
 				52720EAE2BB748CC00014FC6 /* Transform.swift in Sources */,
 				52F95D252BB9F297009395BB /* GameController.swift in Sources */,
+				5204C2E02BC0211200DD5146 /* RenderPass.swift in Sources */,
 				52C25CE52BBB0F630094BD8B /* Options.swift in Sources */,
 				52720EB22BB74EA000014FC6 /* Mesh.swift in Sources */,
 				52F95D0F2BB9BD8F009395BB /* TextureController.swift in Sources */,
@@ -407,6 +441,7 @@
 				5280FA782BB6EB4A007D3BE0 /* Fragment.metal in Sources */,
 				5280FA722BB6E76D007D3BE0 /* MetalView.swift in Sources */,
 				52F95D2E2BB9FFB5009395BB /* Lighting.metal in Sources */,
+				5204C2DE2BC0210A00DD5146 /* Pipelines.swift in Sources */,
 				52720EB92BB758A900014FC6 /* InputController.swift in Sources */,
 				52C25CE82BBB2D7C0094BD8B /* Typhlosion.swift in Sources */,
 				52C25CF52BBB2FAD0094BD8B /* TempGround.swift in Sources */,
@@ -424,6 +459,7 @@
 				52720EBD2BB7945500014FC6 /* Movement.swift in Sources */,
 				52F95D2B2BB9FD33009395BB /* SceneLighting.swift in Sources */,
 				52F95D372BBA0F22009395BB /* DebugLights.swift in Sources */,
+				5204C2E22BC0211D00DD5146 /* ForwardRenderPass.swift in Sources */,
 				52720EA72BB72F4300014FC6 /* Rendering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

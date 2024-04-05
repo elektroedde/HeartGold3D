@@ -4,13 +4,12 @@ class Renderer: NSObject {
     static var device: MTLDevice!
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
-
-    var pipelineState: MTLRenderPipelineState!
-    let depthStencilState: MTLDepthStencilState?
-
+    
     var uniforms = Uniforms()
     var params = Params()
     var options: Options
+    
+    var forwardRenderPass: ForwardRenderPass
 
     init(metalView: MTKView, options: Options) {
         guard
@@ -25,26 +24,11 @@ class Renderer: NSObject {
         // Create the library
         let library = device.makeDefaultLibrary()
         Self.library = library
-        let vertexFunction = library?.makeFunction(name: "vertex_main")
-        let fragmentFunction = library?.makeFunction(name: "fragment_main")
-
-        // Create the pipeline state
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = vertexFunction
-        pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
-
-        do {
-            pipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-
-        depthStencilState = Renderer.buildDepthStencilState()
 
         self.options = options
+        
+        
+        forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
         super.init()
 
         metalView.clearColor = MTLClearColor(red: 0.65, green: 0.8, blue: 1.0, alpha: 1.0)
@@ -65,6 +49,7 @@ class Renderer: NSObject {
 
 extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        forwardRenderPass.resize(view: view, size: size)
     }
 
     func updateUniforms(scene: GameScene) {
@@ -77,36 +62,16 @@ extension Renderer {
     func draw(scene: GameScene, in view: MTKView) {
         guard
             let commandBuffer = Self.commandQueue.makeCommandBuffer(),
-            let descriptor = view.currentRenderPassDescriptor,
-            let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
+            let descriptor = view.currentRenderPassDescriptor
         else { return }
 
         updateUniforms(scene: scene)
 
-        renderEncoder.setDepthStencilState(depthStencilState)
-        renderEncoder.setRenderPipelineState(pipelineState)
-
-        var lights = scene.lighting.lights
-        renderEncoder.setFragmentBytes(&lights, length: MemoryLayout<Light>.stride * lights.count, index: LightBuffer.index)
-        if options.showWireframe {
-            renderEncoder.setTriangleFillMode(.lines)
-        }
-
-        for model in scene.models {
-            model.render(
-                encoder: renderEncoder,
-                uniforms: uniforms,
-                params: params)
-        }
+        forwardRenderPass.descriptor = descriptor
+        forwardRenderPass.draw(commandBuffer: commandBuffer, scene: scene, uniforms: uniforms, params: params)
         
-        if options.showDebugLights {
-            DebugLights.draw(
-                lights: scene.lighting.lights[0],
-                encoder: renderEncoder,
-                uniforms: uniforms)
-        }
+        
 
-        renderEncoder.endEncoding()
 
         guard let drawable = view.currentDrawable
         else { return }
